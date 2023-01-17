@@ -50,6 +50,7 @@ public class SortString  {
         int j = 0;
         for (int i = arraysortA.length-1; i >= 0; i--) {
             arraysortD[j] = arraysortA[i];
+            j++;
         }
         return arraysortD;
     }

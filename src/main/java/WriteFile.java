@@ -1,7 +1,4 @@
 import java.io.*;
-import java.sql.Struct;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WriteFile {
@@ -12,7 +9,6 @@ public class WriteFile {
     private String outFile;
     int[] arrayInt;
     String[] arrayString;
-    List listData = new ArrayList<>();
 
     public WriteFile(List<String> list, String path, String outFile, boolean conditionSortA, boolean conditionTypeS) {
         this.list = list;
@@ -28,48 +24,46 @@ public class WriteFile {
             return;
         }
 
-    if (conditionTypeS=true) {
+    if (conditionTypeS==true) {
         String [] array = new String[list.size()];
         list.toArray(array);
-        if (conditionSortA=true) {
+        if (conditionSortA==true) {
             arrayString = SortString.doSortA(array);
-            listData = Arrays.asList(arrayString);
-            doWriteFile(listData);
+            doWriteFile(arrayString);
         } else {
             arrayString = SortString.doSortD(array);
-            listData = Arrays.asList(arrayString);
-            doWriteFile(listData);
+            doWriteFile(arrayString);
         }
     }
-        if (conditionTypeS=false) {
+        if (conditionTypeS==false) {
             int [] array = new int[list.size()];
+
+            int i=0;
             for (String s:list
                  ) {
-                int i=0;
-                array[i]=Integer.getInteger(s);
+                array[i]=Integer.parseInt(s);
+                i++;
             }
-            if (conditionSortA=true) {
+            if (conditionSortA==true) {
                 arrayInt = SortNumber.doSortA(array);
-                listData = Arrays.asList(arrayInt);
-                doWriteFile(listData);
+                doWriteFile(arrayInt);
             } else {
                 arrayInt = SortNumber.doSortD(array);
-                listData = Arrays.asList(arrayInt);
-                doWriteFile(listData);
+                doWriteFile(arrayInt);
             }
         }
 
     }
 
-    private void doWriteFile(List list){
+    private void doWriteFile(String [] arrayString){
         try {
             File file = new File(path + "/" + outFile);
             FileWriter fw = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(fw);
             String lineSeparator = System.getProperty("line.separator");
-            for (Object s : list) {
-                String name = s.toString();
-                writer.write(name + lineSeparator);
+            for (String s : arrayString) {
+                String line = s;
+                writer.write(line + lineSeparator);
             }
             writer.close();
 
@@ -79,11 +73,26 @@ public class WriteFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
+    private void doWriteFile(int [] arrayInt){
+        try {
+            File file = new File(path + "/" + outFile);
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter writer = new BufferedWriter(fw);
+            String lineSeparator = System.getProperty("line.separator");
+            for (Integer s : arrayInt) {
+                String line = s.toString();
+                writer.write(line + lineSeparator);
+            }
+            writer.close();
 
+        } catch (FileNotFoundException e) {
+            System.out.println("error for writing " + path + "/" + outFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

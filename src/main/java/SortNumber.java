@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class SortNumber  {
 
     public static  int[] doSortA (int[] array) {
@@ -52,6 +50,7 @@ public class SortNumber  {
         int j = 0;
         for (int i = arraysortA.length-1; i >= 0; i--) {
             arraysortD[j] = arraysortA[i];
+            j++;
         }
         return arraysortD;
     }

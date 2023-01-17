@@ -29,13 +29,13 @@ public class ReadFile {
                             listData.add(line);}
                         else if (isDigit(line)!=null) {
                             listData.add(line);
-                        }
+                        } else
+                            System.out.println("the line in the file " + path + "/" + nameFile + " does not consist of digits");
                     }
                     line = reader.readLine();
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("file not fained " + path + "/" + nameFile);
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
