@@ -21,12 +21,12 @@ public class ReadFile {
                 File file = new File(path + "/" + nameFile);
                 FileReader fr = new FileReader(file);
                 BufferedReader reader = new BufferedReader(fr);
-
                 String line = reader.readLine();
                 while (line != null) {
                     if (!line.contains(" ") & !line.isEmpty() & !line.isBlank()) {
                         if (conditionType){
-                            listData.add(line);}
+                            if (isDigit(line)==null){
+                            listData.add(line);}}
                         else if (isDigit(line)!=null) {
                             listData.add(line);
                         } else
