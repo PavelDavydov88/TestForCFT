@@ -15,18 +15,22 @@ public class ReadFile {
     }
     List<String> doRead(){
         listData = new ArrayList<>();
+        if (list.size()<=1) {
+            System.out.println("error reading files");
+            return listData;
+        }
         for (String nameFile: list
              ) {
             try {
                 File file = new File(path + "/" + nameFile);
                 FileReader fr = new FileReader(file);
                 BufferedReader reader = new BufferedReader(fr);
-
                 String line = reader.readLine();
                 while (line != null) {
                     if (!line.contains(" ") & !line.isEmpty() & !line.isBlank()) {
                         if (conditionType){
-                            listData.add(line);}
+                            if (isDigit(line)==null){
+                            listData.add(line);}}
                         else if (isDigit(line)!=null) {
                             listData.add(line);
                         } else
