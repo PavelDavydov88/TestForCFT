@@ -2,10 +2,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List listData;
+        List<String> listData;
         ParseArgs parseArgs = new ParseArgs(args);
         parseArgs.doParse();
-        if (parseArgs.isiType()==false & parseArgs.issType()==false) {
+        if (!parseArgs.isiType() && !parseArgs.issType()) {
             System.out.println("parameters are not enough");
             return;
         }

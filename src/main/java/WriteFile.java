@@ -2,75 +2,73 @@ import java.io.*;
 import java.util.List;
 
 /**
- * Класс осуществляет запись выходного файла с отсортированными данными,
+ * Класс осуществляет запись выходного файла с отсортированными данными
  */
-
 public class WriteFile {
-    private List<String> list;
+
+    private List<String> inputData;
     private String path;
     private boolean conditionSortA;
     private boolean conditionTypeS;
     private String outFile;
-    int[] arrayInt;
-    String[] arrayString;
+    private int[] arrayInt;
+    private String[] arrayString;
 
-    public WriteFile(List<String> list, String path, String outFile, boolean conditionSortA, boolean conditionTypeS) {
-        this.list = list;
+    public WriteFile(List<String> inputData, String path, String outFile, boolean conditionSortA, boolean conditionTypeS) {
+        this.inputData = inputData;
         this.path = path;
         this.conditionSortA = conditionSortA;
         this.conditionTypeS = conditionTypeS;
         this.outFile = outFile;
     }
 
-    void doWrite(){
-        if (list.isEmpty()) {
+    void doWrite() {
+
+        if (inputData.isEmpty()) {
             System.out.println("error reading all files");
             return;
         }
 
-    if (conditionTypeS==true) {
-        String [] array = new String[list.size()];
-        list.toArray(array);
-        if (conditionSortA==true) {
-            arrayString = SortString.doSortA(array);
-            doWriteFile(arrayString);
-        } else {
-            arrayString = SortString.doSortD(array);
+        if (conditionTypeS) {
+            String[] array = new String[inputData.size()];
+            inputData.toArray(array);
+            if (conditionSortA) {
+                arrayString = SortString.doSortA(array);
+            } else {
+                arrayString = SortString.doSortD(array);
+            }
             doWriteFile(arrayString);
         }
-    }
-        if (conditionTypeS==false) {
-            int [] array = new int[list.size()];
 
-            int i=0;
-            for (String s:list
-                 ) {
-                array[i]=Integer.parseInt(s);
+        if (!conditionTypeS) {
+            int[] array = new int[inputData.size()];
+
+            int i = 0;
+            for (String s : inputData) {
+                array[i] = Integer.parseInt(s);
                 i++;
             }
-            if (conditionSortA==true) {
+            if (conditionSortA) {
                 arrayInt = SortNumber.doSortA(array);
-                doWriteFile(arrayInt);
             } else {
                 arrayInt = SortNumber.doSortD(array);
-                doWriteFile(arrayInt);
             }
+
+            doWriteFile(arrayInt);
         }
 
     }
 
-    private void doWriteFile(String [] arrayString){
+    private void doWriteFile(String[] arrayString) {
         try {
             File file = new File(path + "/" + outFile);
             FileWriter fw = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(fw);
             String lineSeparator = System.getProperty("line.separator");
             for (String s : arrayString) {
-                String line = s;
-                writer.write(line + lineSeparator);
+                writer.write(s + lineSeparator);
             }
             writer.close();
-
         } catch (FileNotFoundException e) {
             System.out.println("error for writing " + path + "/" + outFile);
             e.printStackTrace();
@@ -79,7 +77,7 @@ public class WriteFile {
         }
     }
 
-    private void doWriteFile(int [] arrayInt){
+    private void doWriteFile(int[] arrayInt) {
         try {
             File file = new File(path + "/" + outFile);
             FileWriter fw = new FileWriter(file);
@@ -90,14 +88,10 @@ public class WriteFile {
                 writer.write(line + lineSeparator);
             }
             writer.close();
-
         } catch (FileNotFoundException e) {
             System.out.println("error for writing " + path + "/" + outFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
-
 }
