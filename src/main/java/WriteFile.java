@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.List;
 
+/**
+ * Класс осуществляет запись выходного файла с отсортированными данными,
+ */
+
 public class WriteFile {
     private List<String> list;
     private String path;

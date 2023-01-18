@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс осуществляет разбор входных параметров для выполнения программы
+ */
+
 public class ParseArgs {
 
     private String[] args;

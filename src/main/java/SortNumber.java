@@ -1,3 +1,8 @@
+/**
+ * Класс осуществляет сортировку слиянием входных данных типа int
+ * сортировка по возратснаю или убыванию
+ */
+
 public class SortNumber  {
 
     public static  int[] doSortA (int[] array) {

@@ -1,3 +1,8 @@
+/**
+ * Класс осуществляет сортировку слиянием входных данных типа String
+ * сортировка по возратснаю или убыванию
+ */
+
 public class SortString  {
 
     public static String[] doSortA(String[] array) {
